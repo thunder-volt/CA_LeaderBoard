@@ -1,5 +1,6 @@
 import React from 'react'
 import './Leaderboard.css'
+import { useState } from 'react'
 const Leaderboard = () => {
 
     const caData = [
@@ -8,80 +9,82 @@ const Leaderboard = () => {
             name: "Akshay",
             city: "Kolkata",
             college: "IITM",
-            Points: 100
+            Points: 10
+
         },
         {
             id: 2,
             name: "Akshay",
             city: "Kolkata",
             college: "IITM",
-            Points: 100
+            Points: 1000
         },
         {
             id: 3,
             name: "Akshay",
             city: "Kolkata",
             college: "IITM",
-            Points: 100
+            Points: 1500
         },
         {
             id: 4,
             name: "Akshay",
             city: "Kolkata",
             college: "IITM",
-            Points: 100
+            Points: 1
         },
         {
             id: 5,
             name: "Akshay",
             city: "Kolkata",
             college: "IITM",
-            Points: 100
+            Points: 50
         },
         {
             id: 6,
             name: "Akshay",
             city: "Kolkata",
             college: "IITM",
-            Points: 100
+            Points: 190
         },
         {
             id: 7,
             name: "Akshay",
             city: "Kolkata",
             college: "IITM",
-            Points: 100
+            Points: 70
         },
         {
             id: 8,
             name: "Akshay",
             city: "Kolkata",
             college: "IITM",
-            Points: 100
+            Points: 10000
         },
         {
             id: 9,
             name: "Akshay",
             city: "Kolkata",
             college: "IITM",
-            Points: 100
+            Points: 130
         },
         {
             id: 10,
             name: "Akshay",
-            city: "Kolkata",
+            city: "Delhi",
             college: "IITM",
-            Points: 100
+            Points: 66
         },
         {
             id: 11,
             name: "Akshay",
             city: "Kolkata",
             college: "IITM",
-            Points: 100
+            Points: 89
         },
 
     ]
+    const [searchTerm, setSearchTerm] = useState('');
     return (
         <>
             <div className='ld'>LEADERBOARD</div>
@@ -97,6 +100,10 @@ const Leaderboard = () => {
 
                 </div>
             </div> */}
+            <div className='srch'>
+                <input type="text" placeholder='Search CA' id='search' onChange={event => { setSearchTerm(event.target.value) }} />
+            </div>
+
             <div className='tdHead'>
                 <div className='a1'>Sl:</div>
                 <div className='a1'>Name</div>
@@ -105,7 +112,24 @@ const Leaderboard = () => {
                 <div className='a1'>Points</div>
             </div>
             {
-                caData.map((curElm) => {
+                caData.filter((val) => {
+                    if (searchTerm === '') {
+                        return val;
+                    }
+                    else if (val.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())) {
+                        return val;
+                    }
+                    else if (val.city.toLowerCase().includes(searchTerm.toLocaleLowerCase())) {
+                        return val;
+                    }
+                    else if (val.college.toLowerCase().includes(searchTerm.toLocaleLowerCase())) {
+                        return val;
+                    }
+                    else if (val.Points >= searchTerm) {
+                        return val;
+                    }
+
+                }).map((curElm) => {
                     return <div className='tdRow'>
                         <div> {curElm.id}</div>
                         <div> {curElm.name}</div>
